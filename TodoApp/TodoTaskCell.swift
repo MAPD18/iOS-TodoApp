@@ -8,8 +8,16 @@
 
 import UIKit
 
+protocol TaskStatusChangeListener {
+    func onTaskStatusChange(checked: Bool, section: Int, index: Int)
+}
+
 class TodoTaskCell: UITableViewCell {
 
+    var delegate : TaskStatusChangeListener?
+    var index : Int?
+    var section : Int?
+    var tasks : [TaskModel]?
     
     @IBOutlet weak var switchOutlet: UISwitch!
     @IBOutlet weak var taskLabel: UILabel!
@@ -29,14 +37,6 @@ class TodoTaskCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
-        if selected {
-            if switchOutlet.isOn {
-                switchOutlet.setOn(false, animated: true)
-            } else {
-                switchOutlet.setOn(true, animated: true)
-            }
-        }
     }
 
 }

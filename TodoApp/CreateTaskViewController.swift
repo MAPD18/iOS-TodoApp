@@ -8,8 +8,21 @@
 
 import UIKit
 
+protocol AddTaskListener {
+    func addTask(name: String)
+}
+
 class CreateTaskViewController: UIViewController {
 
+    var delegate : AddTaskListener?
+    
+    @IBOutlet weak var taskNameOutlet: UITextField!
+    
+    @IBAction func onAddButtonClicked() {
+        delegate?.addTask(name: taskNameOutlet!.text!)
+        dismiss(animated: true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

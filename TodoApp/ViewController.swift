@@ -8,7 +8,18 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddTaskListener, TaskStatusChangeListener {
+    
+    func onTaskStatusChange(checked: Bool, section: Int, index: Int) {
+        <#code#>
+    }
+    
+    func addTask(name: String) {
+        data[.todo]?.append(TaskModel(name: name))
+        tableView.reloadData()
+    }
+    
+    @IBOutlet weak var tableView: UITableView!
     
     var tasks : [TaskModel] = [
         TaskModel(name: "Task 1", checked: true),
@@ -75,6 +86,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
             cell.switchOutlet.isOn = task.checked
         }
         
+        cell.delegate = self
+        cell.index = indexPath.row
+        cell.section = indexPath.section
+        cell.tasks = data[TableSection(rawValue: indexPath.section)!]
+        
         return cell
     }
     
@@ -84,6 +100,11 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         // Do any additional setup after loading the view, typically from a nib.
         
         sortData()
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        let vc = segue.destination as? CreateTaskViewController
+        vc?.delegate = self
     }
 
 
