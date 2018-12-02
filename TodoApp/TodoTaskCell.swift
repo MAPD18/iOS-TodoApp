@@ -14,11 +14,17 @@ class TodoTaskCell: UITableViewCell {
     @IBOutlet weak var switchOutlet: UISwitch!
     @IBOutlet weak var taskLabel: UILabel!
 
-
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        // Grey color for the DONE Tasks
+        switchOutlet.onTintColor = UIColor.gray
+        
+        // Green color for the TODO Tasks
+        switchOutlet.tintColor = UIColor.green
+        switchOutlet.layer.cornerRadius = switchOutlet.frame.height / 2
+        switchOutlet.backgroundColor = UIColor.green
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

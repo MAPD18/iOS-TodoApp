@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="phY-UH-rH5">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="taskCell" id="a5i-F1-zHP" customClass="TodoTaskCell" customModule="TodoApp" customModuleProvider="target">
@@ -53,13 +53,28 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="u9G-Wj-ZIk"/>
                                 </connections>
                             </tableView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mrB-CK-uD9">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="ToDo App" id="C0P-i9-9Z6">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Q8W-mn-kMs">
+                                            <connections>
+                                                <segue destination="OGL-ce-2Uk" kind="show" identifier="addTaskSegue" id="0q7-hz-IKl"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="phY-UH-rH5" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="ArN-ov-H15"/>
                             <constraint firstItem="phY-UH-rH5" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="DlO-gT-Tw4"/>
+                            <constraint firstItem="phY-UH-rH5" firstAttribute="top" secondItem="mrB-CK-uD9" secondAttribute="bottom" id="P91-ZM-Jnm"/>
                             <constraint firstItem="phY-UH-rH5" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QYo-eD-Mb5"/>
+                            <constraint firstItem="mrB-CK-uD9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="QaO-tr-EXc"/>
+                            <constraint firstItem="mrB-CK-uD9" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="SB6-h3-yRV"/>
                             <constraint firstItem="phY-UH-rH5" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="nNm-ZY-aPl"/>
+                            <constraint firstItem="mrB-CK-uD9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="vRz-Ct-hRm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -67,6 +82,41 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="136.80000000000001" y="133.5832083958021"/>
+        </scene>
+        <!--Create Task View Controller-->
+        <scene sceneID="YJU-rY-sIY">
+            <objects>
+                <viewController id="OGL-ce-2Uk" customClass="CreateTaskViewController" customModule="TodoApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Gdw-Y4-Is3">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="j7P-YZ-ifR">
+                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <items>
+                                    <navigationItem title="Add Task" id="R5D-Is-0zG">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="JgL-4U-4yy">
+                                            <connections>
+                                                <action selector="onCancelButtonClicked:" destination="OGL-ce-2Uk" id="TZV-wZ-Nge"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="TGR-yK-8lj"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="j7P-YZ-ifR" firstAttribute="leading" secondItem="C4P-e7-27z" secondAttribute="leading" id="ZjY-bL-lY9"/>
+                            <constraint firstItem="j7P-YZ-ifR" firstAttribute="trailing" secondItem="C4P-e7-27z" secondAttribute="trailing" id="bQd-hf-zK4"/>
+                            <constraint firstItem="j7P-YZ-ifR" firstAttribute="top" secondItem="C4P-e7-27z" secondAttribute="top" id="nCt-55-N2L"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="C4P-e7-27z"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ALV-Yh-oOY" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1054" y="134"/>
         </scene>
     </scenes>
 </document>
