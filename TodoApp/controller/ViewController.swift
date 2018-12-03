@@ -122,6 +122,24 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         return UISwipeActionsConfiguration(actions: [deleteAction(at: indexPath)])
     }
     
+    func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        if indexPath.section == TableSection.todo.rawValue {
+            return UISwipeActionsConfiguration(actions: [completeTaskAction(at: indexPath)])
+        }
+        return nil
+    }
+    
+    func completeTaskAction(at indexPath: IndexPath) -> UIContextualAction {
+        let completeTaskAction = UIContextualAction(style: .normal, title: "Complete") { (action, view, completion) in
+            if TableSection(rawValue: indexPath.section) != nil {
+                self.onTaskStatusChange(checked: true, section: indexPath.section, index: indexPath.row)
+            }
+            completion(true)
+        }
+        completeTaskAction.backgroundColor = .green
+        return completeTaskAction
+    }
+    
     func deleteAction(at indexPath: IndexPath) -> UIContextualAction {
         let deleteAction = UIContextualAction(style: .destructive, title: "Delete") { (action, view, completion) in
             if let tableSection = TableSection(rawValue: indexPath.section) {
