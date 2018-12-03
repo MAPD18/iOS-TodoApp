@@ -7,8 +7,22 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SaveTaskListener, TaskListener {
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    enum TableSection: Int {
+        case todo = 0, done = 1
+    }
+    
+    let sectionHeaderHeight: CGFloat = 25
+    var db : Firestore?
+    
+    let appDelegate = UIApplication.shared.delegate as! AppDelegate 
+    
+    var data = [TableSection: [TaskModel]]()
     
     func saveTask(selectedTask: SelectedTask) {
         let updatedTask = data[TableSection(rawValue: selectedTask.section!)!]?[selectedTask.index!]
@@ -39,31 +53,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     func saveTask(name: String, details: String) {
-        data[.todo]?.append(TaskModel(name: name, details: details))
-        tableView.reloadData()
-    }
-    
-    @IBOutlet weak var tableView: UITableView!
-    
-    var tasks : [TaskModel] = [
-        TaskModel(name: "Task 1", checked: true),
-        TaskModel(name: "Task 2", checked: false),
-        TaskModel(name: "Task 3", checked: true),
-        TaskModel(name: "Task 4", checked: true),
-        TaskModel(name: "Task 5", checked: false),
-        ]
-    
-    enum TableSection: Int {
-        case todo = 0, done = 1
-    }
-    
-    let sectionHeaderHeight: CGFloat = 25
-    
-    var data = [TableSection: [TaskModel]]()
-    
-    func sortData() {
-        data[.todo] = tasks.filter({$0.checked == false})
-        data[.done] = tasks.filter({$0.checked == true})
+        data[.todo]?.append(TaskModel(documentId: "1eac431s", name: name, details: details))
+        tableView.reloadSections([TableSection.todo.rawValue], with: .automatic)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -154,9 +145,50 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
         
-        sortData()
+        db = Firestore.firestore()
+        loadTasks()
+    }
+    
+    func loadTasks() {
+        data[.todo] = []
+        data[.done] = []
+        
+        db?.collection(AppConstants.FIREBASE_BASE_PATH).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    let task = TaskModel(document: document)
+                    let tableSection = TableSection(rawValue: task.checked ? 1 : 0)!
+                    self.data[tableSection]?.append(task)
+                    self.tableView.reloadSections([tableSection.rawValue], with: .automatic)
+                }
+            }
+        }
+        
+//        var ref: DocumentReference? = nil
+//        ref = db.collection("users/9je10kTQLrZCXNEoDlBy/tasks").addDocument(data: [
+//            "name": "New Task",
+//            "details": "New Task Details",
+//            "checked": false
+//        ]) { err in
+//            if let err = err {
+//                print("Error adding document: \(err)")
+//            } else {
+//                print("Document added with ID: \(ref!.documentID)")
+//            }
+//        }
+//
+        
+        
+//        db.collection("users/9je10kTQLrZCXNEoDlBy/tasks").document("QEGDXwZNzURzvOxdIkVV").delete() { err in
+//            if let err = err {
+//                print("Error removing document: \(err)")
+//            } else {
+//                print("Document successfully removed!")
+//            }
+//        }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
