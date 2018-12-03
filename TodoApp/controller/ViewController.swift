@@ -65,17 +65,27 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     func onTaskStatusChange(checked: Bool, section: Int, index: Int) {
         let tableSection = TableSection(rawValue: section)!
         let task = data[tableSection]![index]
-        task.checked = checked
         
-        if tableSection == TableSection.done {
-            data[.done]?.remove(at: index)
-            data[.todo]?.append(task)
-        } else {
-            data[.todo]?.remove(at: index)
-            data[.done]?.append(task)
+        db?.collection(AppConstants.FIREBASE_BASE_PATH).document(task.documentId).setData([
+            AppConstants.TASK_CHECKED_FIELD: checked as Any
+        ], merge: true) { err in
+            if let err = err {
+                print("Error writing document: \(err)")
+            } else {
+                print("Document successfully written!")
+                task.checked = checked
+                
+                if tableSection == TableSection.done {
+                    self.data[.done]?.remove(at: index)
+                    self.data[.todo]?.append(task)
+                } else {
+                    self.data[.todo]?.remove(at: index)
+                    self.data[.done]?.append(task)
+                }
+                
+                self.tableView.reloadSections([TableSection.todo.rawValue, TableSection.done.rawValue], with: .automatic)
+            }
         }
-        
-        tableView.reloadSections([TableSection.todo.rawValue, TableSection.done.rawValue], with: .automatic)
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -196,11 +206,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
                 }
             }
         }
-        
-        
-        
-        
-        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -213,8 +218,6 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         
         vc?.delegate = self
     }
-
-
 }
 
 class SelectedTask {
