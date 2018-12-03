@@ -8,7 +8,19 @@
 
 import UIKit
 
-class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddTaskListener, TaskStatusChangeListener {
+class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SaveTaskListener, TaskListener {
+    
+    func saveTask(selectedTask: SelectedTask) {
+        let updatedTask = data[TableSection(rawValue: selectedTask.section!)!]?[selectedTask.index!]
+        updatedTask?.name = (selectedTask.task?.name)!
+        updatedTask?.details = (selectedTask.task?.details)!
+        
+        tableView.reloadSections([selectedTask.section!], with: .automatic)
+    }
+    
+    func onTaskSelected(section: Int, index: Int) {
+        performSegue(withIdentifier: "saveTaskSegue", sender: SelectedTask(task: (data[TableSection(rawValue: section)!]?[index])!, section: section, index: index))
+    }
     
     func onTaskStatusChange(checked: Bool, section: Int, index: Int) {
         let tableSection = TableSection(rawValue: section)!
@@ -26,8 +38,8 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
         tableView.reloadSections([TableSection.todo.rawValue, TableSection.done.rawValue], with: .automatic)
     }
     
-    func addTask(name: String) {
-        data[.todo]?.append(TaskModel(name: name))
+    func saveTask(name: String, details: String) {
+        data[.todo]?.append(TaskModel(name: name, details: details))
         tableView.reloadData()
     }
     
@@ -115,10 +127,28 @@ class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSour
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let vc = segue.destination as? CreateTaskViewController
+        let vc = segue.destination as? TaskDetailsViewController
+        
+        let selectedTask = sender as? SelectedTask
+        if selectedTask != nil {
+            vc?.selectedTask = selectedTask
+        }
+        
         vc?.delegate = self
     }
 
 
+}
+
+class SelectedTask {
+    var task: TaskModel?
+    var section: Int?
+    var index: Int?
+    
+    init(task: TaskModel, section: Int, index: Int) {
+        self.task = task
+        self.section = section
+        self.index = index
+    }
 }
 

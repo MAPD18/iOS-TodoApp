@@ -8,13 +8,14 @@
 
 import UIKit
 
-protocol TaskStatusChangeListener {
+protocol TaskListener {
     func onTaskStatusChange(checked: Bool, section: Int, index: Int)
+    func onTaskSelected(section: Int, index: Int)
 }
 
 class TodoTaskCell: UITableViewCell {
 
-    var delegate : TaskStatusChangeListener?
+    var delegate : TaskListener?
     var index : Int?
     var section : Int?
     var tasks : [TaskModel]?
@@ -37,6 +38,9 @@ class TodoTaskCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+        if selected {
+            delegate?.onTaskSelected(section: section!, index: index!)
+        }
     }
 
     @IBAction func onTaskStatusChange() {

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		F6588C8121B35C44001C0185 /* CreateTaskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6588C8021B35C44001C0185 /* CreateTaskViewController.swift */; };
+		F6588C8121B35C44001C0185 /* TaskDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6588C8021B35C44001C0185 /* TaskDetailsViewController.swift */; };
 		F6D5604221AF4FE100ED9CC5 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D5604121AF4FE100ED9CC5 /* AppDelegate.swift */; };
 		F6D5604421AF4FE100ED9CC5 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6D5604321AF4FE100ED9CC5 /* ViewController.swift */; };
 		F6D5604721AF4FE100ED9CC5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F6D5604521AF4FE100ED9CC5 /* Main.storyboard */; };
@@ -18,7 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		F6588C8021B35C44001C0185 /* CreateTaskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTaskViewController.swift; sourceTree = "<group>"; };
+		F6588C8021B35C44001C0185 /* TaskDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskDetailsViewController.swift; sourceTree = "<group>"; };
 		F6D5603E21AF4FE100ED9CC5 /* TodoApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TodoApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F6D5604121AF4FE100ED9CC5 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F6D5604321AF4FE100ED9CC5 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -46,7 +46,7 @@
 			children = (
 				F6D5604121AF4FE100ED9CC5 /* AppDelegate.swift */,
 				F6D5604321AF4FE100ED9CC5 /* ViewController.swift */,
-				F6588C8021B35C44001C0185 /* CreateTaskViewController.swift */,
+				F6588C8021B35C44001C0185 /* TaskDetailsViewController.swift */,
 				F6D5605321AF531600ED9CC5 /* TodoTaskCell.swift */,
 			);
 			path = controller;
@@ -172,7 +172,7 @@
 				F6D5604421AF4FE100ED9CC5 /* ViewController.swift in Sources */,
 				F6D5604221AF4FE100ED9CC5 /* AppDelegate.swift in Sources */,
 				F6D5605421AF531600ED9CC5 /* TodoTaskCell.swift in Sources */,
-				F6588C8121B35C44001C0185 /* CreateTaskViewController.swift in Sources */,
+				F6588C8121B35C44001C0185 /* TaskDetailsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

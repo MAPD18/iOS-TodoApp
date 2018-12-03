@@ -14,8 +14,8 @@ class TaskModel
     var checked = false
     var details = ""
     
-    convenience init(name : String) {
-        self.init(name: name, checked: false, details: "details")
+    convenience init(name: String, details: String) {
+        self.init(name: name, checked: false, details: details)
     }
     
     init(name: String, checked: Bool, details: String) {
