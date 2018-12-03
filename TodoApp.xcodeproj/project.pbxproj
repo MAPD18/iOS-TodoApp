@@ -41,6 +41,26 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		F6588C8221B4A7C6001C0185 /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				F6D5604121AF4FE100ED9CC5 /* AppDelegate.swift */,
+				F6D5604321AF4FE100ED9CC5 /* ViewController.swift */,
+				F6588C8021B35C44001C0185 /* CreateTaskViewController.swift */,
+				F6D5605321AF531600ED9CC5 /* TodoTaskCell.swift */,
+			);
+			path = controller;
+			sourceTree = "<group>";
+		};
+		F6588C8321B4A7E7001C0185 /* view */ = {
+			isa = PBXGroup;
+			children = (
+				F6D5604521AF4FE100ED9CC5 /* Main.storyboard */,
+				F6D5604A21AF4FE600ED9CC5 /* LaunchScreen.storyboard */,
+			);
+			path = view;
+			sourceTree = "<group>";
+		};
 		F6D5603521AF4FE000ED9CC5 = {
 			isa = PBXGroup;
 			children = (
@@ -60,15 +80,11 @@
 		F6D5604021AF4FE100ED9CC5 /* TodoApp */ = {
 			isa = PBXGroup;
 			children = (
+				F6588C8321B4A7E7001C0185 /* view */,
+				F6588C8221B4A7C6001C0185 /* controller */,
 				F6D5605521AF574100ED9CC5 /* model */,
-				F6D5604121AF4FE100ED9CC5 /* AppDelegate.swift */,
-				F6D5604321AF4FE100ED9CC5 /* ViewController.swift */,
-				F6D5604521AF4FE100ED9CC5 /* Main.storyboard */,
 				F6D5604821AF4FE600ED9CC5 /* Assets.xcassets */,
-				F6D5604A21AF4FE600ED9CC5 /* LaunchScreen.storyboard */,
 				F6D5604D21AF4FE600ED9CC5 /* Info.plist */,
-				F6D5605321AF531600ED9CC5 /* TodoTaskCell.swift */,
-				F6588C8021B35C44001C0185 /* CreateTaskViewController.swift */,
 			);
 			path = TodoApp;
 			sourceTree = "<group>";

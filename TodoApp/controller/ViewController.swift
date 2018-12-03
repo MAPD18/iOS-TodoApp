@@ -11,7 +11,19 @@ import UIKit
 class ViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, AddTaskListener, TaskStatusChangeListener {
     
     func onTaskStatusChange(checked: Bool, section: Int, index: Int) {
-        <#code#>
+        let tableSection = TableSection(rawValue: section)!
+        let task = data[tableSection]![index]
+        task.checked = checked
+        
+        if tableSection == TableSection.done {
+            data[.done]?.remove(at: index)
+            data[.todo]?.append(task)
+        } else {
+            data[.todo]?.remove(at: index)
+            data[.done]?.append(task)
+        }
+        
+        tableView.reloadSections([TableSection.todo.rawValue, TableSection.done.rawValue], with: .automatic)
     }
     
     func addTask(name: String) {

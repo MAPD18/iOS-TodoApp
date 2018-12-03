@@ -39,4 +39,7 @@ class TodoTaskCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
     }
 
+    @IBAction func onTaskStatusChange() {
+        delegate?.onTaskStatusChange(checked: switchOutlet.isOn, section: section!, index: index!)
+    }
 }
